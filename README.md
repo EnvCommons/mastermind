@@ -19,11 +19,11 @@ Mastermind does not require a sandbox. It has minimal compute requirements.
 
 ## License
 
-[MIT](https://github.com/LeonGuertler/TextArena/blob/main/LICENSE).
+[MIT](https://opensource.org/licenses/MIT). The underlying [TextArena](https://github.com/LeonGuertler/TextArena) framework is also MIT.
 
 ## Tasks
 
-There are two splits: train (450 tasks) and test (450 tasks). Each split contains 50 tasks across each of 9 variants:
+There are 450 tasks in the `train` split and 450 in `test`. Each split contains 50 tasks across each of 9 variants:
 
 - **Mastermind-v0**
 - **Mastermind-v0-train**
@@ -39,7 +39,7 @@ Each task is seeded for reproducibility.
 
 ## Reward Structure
 
-This is a sparse reward environment. TextArena's Mastermind reward is already in `[0.0, 1.0]` and is passed through unchanged: cracking the code scores `1.0`, and every other terminal outcome (turn limit or an invalid guess) scores a partial-credit fraction — `(black + 0.5 * white) / code_length` from the final guess. Intermediate guesses score `0.0`.
+This is a sparse reward environment. TextArena's Mastermind reward is already in `[0.0, 1.0]` and is passed through unchanged: cracking the code scores `1.0`, and every other terminal outcome (turn limit or an invalid guess) scores a partial-credit fraction, `(black + 0.5 * white) / code_length` from the final guess. Intermediate guesses score `0.0`.
 
 We do not use LLM graders for this environment; reward is determined programmatically.
 
@@ -59,7 +59,7 @@ Mastermind is a multi-turn environment.
 
 ## Environment Difficulty
 
-This environment ranges from moderate to very challenging depending on the variant. The hard and extreme variants significantly increase difficulty with longer codes and more possible values.
+Difficulty depends on the variant. In TextArena's registration the base `Mastermind-v0` variants use a 4-digit code over 6 values with no repeats and 20 turns, hard uses a 4-digit code over 8 values with 30 turns, and extreme uses a 6-digit code over 12 values with repeats allowed and 50 turns. The `-train` and `-raw` suffixes change only the observation wrappers, not the game.
 
 ## Other Environment Requirements
 
@@ -72,11 +72,13 @@ Agents in Mastermind interact only with a code-breaking game and have no access 
 ## Citations
 
 ```bibtex
-@software{textarena2024,
-  author    = {Guertler, Leon and Banting, Wilfried and Pignatelli, Eduardo},
-  title     = {TextArena},
-  year      = {2024},
-  publisher = {GitHub},
-  url       = {https://github.com/LeonGuertler/TextArena}
+@misc{guertler2025textarena,
+    title={TextArena},
+    author={Leon Guertler and Bobby Cheng and Simon Yu and Bo Liu and Leshem Choshen and Cheston Tan},
+    year={2025},
+    eprint={2504.11442},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL},
+    url={https://arxiv.org/abs/2504.11442},
 }
 ```
